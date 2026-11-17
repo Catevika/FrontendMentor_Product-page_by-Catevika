@@ -43,12 +43,16 @@
 }
 
 .header .cart-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   background: transparent;
   border: none;
-  margin-top: var(--margin-xxs);
+  padding: 0;
+  margin-top: 0;
   margin-right: var(--margin-xs);
   cursor: pointer;
 }
@@ -270,16 +274,21 @@
   fill: var(--white);
 }
 
-/*----------  Women page - Button - Cart notification  ----------*/
-.product-cart-notification {
+/*----------  Header - Cart notification  ----------*/
+.cart-notification {
   position: absolute;
-  top: 30px;
-  right: 21.5rem;
-  font-size: var(--font-size-xs);
-  padding: var(--padding-xxs) var(--padding-m);
+  top: -0.35rem;
+  right: -0.35rem;
+  display: grid;
+  width: 1.25rem;
+  height: 1.25rem;
+  place-items: center;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-bold);
+  text-align: center;
   color: var(--white);
   background-color: var(--orange);
-  border-radius: var(--border-radius-m);
+  border-radius: 50%;
 }
 
 /*----------  Women page - Cart  ----------*/
@@ -418,10 +427,6 @@
 
 /*----------  Women page - media queries  ----------*/
 @media (max-width: 1290px) {
-  .product-cart-notification {
-    right: 11.5rem;
-  }
-
   .product-images {
     width: 80%;
   }
@@ -480,10 +485,6 @@
 
   .product-images {
     width: 100%;
-  }
-
-  .product-cart-notification {
-    right: 8.5rem;
   }
 
   .cart-card {
@@ -607,10 +608,6 @@
     border: none;
   }
 
-  .product-cart-notification {
-    right: 5.5rem;
-  }
-
   .cart-card {
     top: 15%;
     left: 0;
@@ -686,37 +683,19 @@
   }
 }
 
-@media (max-width: 786px) {
-  .product-cart-notification {
-    right: 5rem;
-  }
-}
-
 @media (max-width: 570px) {
-  .product-cart-notification {
-    right: 4.6rem;
-  }
-
   .lightbox-arrow {
     top: 50%;
   }
 }
 
 @media (max-width: 485px) {
-  .product-cart-notification {
-    right: 4.2rem;
-  }
-
   .lightbox-arrow {
     top: 40%;
   }
 }
 
 @media (max-width: 375px) {
-  .product-cart-notification {
-    right: 4rem;
-  }
-
   .lightbox-arrow {
     top: 35%;
   }
