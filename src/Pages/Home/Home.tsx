@@ -10,43 +10,27 @@ import { bigImages, thumbnailImages } from "../../data";
 const Home = ({ isCartOpen }: { isCartOpen: boolean }) => {
 	const { count, setCount, dispatch } = useCart();
 
-	// for bigImages
-	const imageIndexStr = sessionStorage.getItem("selectedIndex") || "1";
-	const imageIndex = parseInt(imageIndexStr);
-
-	const [selectedIndex, setSelectedIndex] = useState(imageIndex);
+	const storedImageId = Number(sessionStorage.getItem("selectedIndex"));
+	const initialImageId =
+		bigImages.find((image) => image.id === storedImageId)?.id ?? bigImages[0].id;
+	const [selectedIndex, setSelectedIndex] = useState(initialImageId);
 
 	// for bigImages on mobile devices
 	const isSmallScreen = useMediaQuery({ maxWidth: 855 });
 
-	const handlePrevious = () => {
-		if (selectedIndex > 0) {
-			setSelectedIndex((selectedIndex) => selectedIndex - 1);
-			sessionStorage.setItem(
-				"selectedIndex",
-				JSON.stringify(selectedIndex - 1)
-			);
-		} else {
-			setSelectedIndex(bigImages.length - 1);
-			sessionStorage.setItem(
-				"selectedIndex",
-				JSON.stringify(bigImages.length - 1)
-			);
-		}
+	const changeImage = (direction: -1 | 1) => {
+		const currentPosition = bigImages.findIndex(
+			(image) => image.id === selectedIndex
+		);
+		const nextPosition =
+			(currentPosition + direction + bigImages.length) % bigImages.length;
+		const nextImageId = bigImages[nextPosition].id;
+		setSelectedIndex(nextImageId);
+		sessionStorage.setItem("selectedIndex", JSON.stringify(nextImageId));
 	};
 
-	const handleNext = () => {
-		if (selectedIndex < bigImages.length - 1) {
-			setSelectedIndex((selectedIndex) => selectedIndex + 1);
-			sessionStorage.setItem(
-				"selectedIndex",
-				JSON.stringify(selectedIndex + 1)
-			);
-		} else {
-			setSelectedIndex(0);
-			sessionStorage.setItem("selectedIndex", "0");
-		}
-	};
+	const handlePrevious = () => changeImage(-1);
+	const handleNext = () => changeImage(1);
 
 	// For Lightbox
 	const [isLightboxOpen, setIsLightboxOpen] = useState(false);
